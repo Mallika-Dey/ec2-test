@@ -1,38 +1,33 @@
-Pipeline {
-    Agent {
-        Node {
-            Label 'pipeline-practice'
+pipeline {
+    agent {
+        node {
+            label 'pipeline-practice'
         }
     }
+    
+    triggers {
+        pollSCM('*/5 * * * *')
+    }
 
-     Triggers {
-            PollSCM '*/5 * * * *'
-     }
-
-    Stages {
-        Stage('build') {
-            Steps {
-                echo "building..."
-                Sh 'echo "test build stage"'
+    stages {
+        stage('Build') {
+            steps {
+                echo "Building..."
+                sh 'echo "Test build stage"'
             }
         }
 
-        Stage('Test') {
-            Steps {
-//                 Checkout([
-//                     $class: 'GitSCM',
-//                     Branches: [[name: '*/master']],
-//                     UserRemoteConfigs: [[url: 'https://github.com/spring-projects/spring-petclinic.git']]
-//                 ])
-                echo "test..."
-                Sh 'echo "test Test stage"'
+        stage('Test') {
+            steps {
+                echo "Testing..."
+                sh 'echo "Test Test stage"'
             }
         }
 
-        Stage('Code Deliver') {
-            Steps {
-                   Sh 'echo "test deliver stage"'
-//                 Sh 'mvn install -Dmaven.test.skip=true'
+        stage('Code Deliver') {
+            steps {
+                sh 'echo "Test deliver stage"'
+                // sh 'mvn install -Dmaven.test.skip=true'
             }
         }
     }
