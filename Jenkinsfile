@@ -1,19 +1,16 @@
 pipeline {
-    agent {
-        node {
-            label 'pipeline-practice'
-        }
-    }
+    agent any
     
     triggers {
         pollSCM('*/5 * * * *')
     }
 
     stages {
-        stage('Build') {
+        stage('Dev') {
             steps {
                 echo "Building..."
-                sh 'apt-get update && apt-get install -y git'
+
+                sh ''
                 sh 'echo "Test build stage"'
             }
         }
