@@ -13,8 +13,7 @@ pipeline {
                 withMaven(
                             maven: 'maven-3',
                             // Use `$WORKSPACE/.repository` for local repository folder to avoid shared repositories
-                            mavenLocalRepo: '.repository',
-                            mavenSettingsConfig: 'my-maven-settings'
+                            mavenLocalRepo: '.repository'
                         ) {
                           sh "mvn clean verify"
                         }
