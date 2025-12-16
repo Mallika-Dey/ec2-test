@@ -13,6 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building..."
+                sh 'apt-get update && apt-get install -y git'
                 sh 'echo "Test build stage"'
             }
         }
