@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+
     triggers {
         pollSCM('*/5 * * * *')
     }
@@ -10,8 +10,14 @@ pipeline {
             steps {
                 echo "Building..."
 
-                sh ''
-                sh 'echo "Test build stage"'
+                withMaven(
+                            maven: 'maven-3',
+                            // Use `$WORKSPACE/.repository` for local repository folder to avoid shared repositories
+                            mavenLocalRepo: '.repository',
+                            mavenSettingsConfig: 'my-maven-settings'
+                        ) {
+                          sh "mvn clean verify"
+                        }
             }
         }
 
